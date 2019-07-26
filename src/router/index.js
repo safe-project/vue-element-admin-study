@@ -121,6 +121,19 @@ export const constantRoutes = [
         meta: { title: 'Profile', icon: 'user', noCache: true }
       }
     ]
+  },
+  {
+    path: '/study',
+    component: Layout,
+    redirect: '/study/await',
+    children: [
+      {
+        path: 'await',
+        component: () => import('@/views/study/await'),
+        name: 'Await',
+        meta: { title: 'Await', icon: 'skill', noCache: true }
+      }
+    ]
   }
 ]
 

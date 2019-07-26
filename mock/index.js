@@ -1,11 +1,15 @@
+
+
 import Mock from 'mockjs'
 import { param2Obj } from '../src/utils'
 
+/*这4个都是数据*/
 import user from './user'
 import role from './role'
 import article from './article'
 import search from './remote-search'
 
+/*思考：什么情景用...*/
 const mocks = [
   ...user,
   ...role,
@@ -13,9 +17,9 @@ const mocks = [
   ...search
 ]
 
-// for front mock
-// please use it cautiously, it will redefine XMLHttpRequest,
-// which will cause many of your third-party libraries to be invalidated(like progress event).
+// 为前端mock数据
+// 请小心谨慎的使用它，因为它会重定义http请求
+// 很容易引起你的第三方库失效
 export function mockXHR() {
   // mock patch
   // https://github.com/nuysoft/Mock/issues/300
