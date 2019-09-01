@@ -4,12 +4,13 @@ const config = require('../vue.config.js')
 const rawArgv = process.argv.slice(2)
 const args = rawArgv.join(' ')
 
+// 这个文件里面好像都是打包预览的代码
 if (process.env.npm_config_preview || rawArgv.includes('--preview')) {
   const report = rawArgv.includes('--report')
 
   run(`vue-cli-service build ${args}`)
 
-  const port = 8123
+  const port = 8125
   const publicPath = config.publicPath
 
   var connect = require('connect')

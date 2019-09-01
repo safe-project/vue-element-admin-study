@@ -6,18 +6,18 @@ import { getToken } from '@/utils/auth'
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  // withCredentials: true, // send cookies when cross-domain requests
+  // withCredentials: true, // send cookies when cross-domain requests 跨域请求时发送cookies
   timeout: 5000 // request timeout
 })
 
-// request interceptor
+// request interceptor 请求拦截器
 service.interceptors.request.use(
   config => {
     // do something before request is sent
-
+    // 
     if (store.getters.token) {
-      // let each request carry token
-      // ['X-Token'] is a custom headers key
+      // let each request carry token 这里是可以主动设置每次请求携带token
+      // ['X-Token'] is a custom headers key 
       // please modify it according to the actual situation
       config.headers['X-Token'] = getToken()
     }
@@ -30,9 +30,9 @@ service.interceptors.request.use(
   }
 )
 
-// response interceptor
+// response interceptor 响应拦截器
 service.interceptors.response.use(
-  /**
+  /** 如果你想得到http请求的一些信息，比如请求头和响应状态，就在这里设置
    * If you want to get http information such as headers or status
    * Please return  response => response
   */
@@ -45,7 +45,8 @@ service.interceptors.response.use(
   response => {
     const res = response.data
 
-    // if the custom code is not 20000, it is judged as an error.
+    // if the custom code is not 20000, it is judged as an error. 如果响应回来的status不是20000，那肯定就是错了，怎么处理看下面
+    // 首先肯定得message弹个错误出来
     if (res.code !== 20000) {
       Message({
         message: res.message || 'Error',
@@ -54,6 +55,7 @@ service.interceptors.response.use(
       })
 
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
+      // 
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
         // to re-login
         MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
@@ -62,10 +64,12 @@ service.interceptors.response.use(
           type: 'warning'
         }).then(() => {
           store.dispatch('user/resetToken').then(() => {
+          	// 重置token后，页面刷新
             location.reload()
           })
         })
       }
+      // 抛个错误出来
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
       return res

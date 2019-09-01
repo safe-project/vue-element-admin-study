@@ -1,5 +1,5 @@
 // 先看懂代码，再去学着改他的代码，别想着一上来就开始改
-
+// 看懂先看架构代码！再去看组件代码！
 
 /*一文搞懂async、await在请求接口时的使用，也主要是请求接口时使用 https://www.cnblogs.com/SamWeb/p/8417940.html
 总结：async里面包着await，await后面跟着promise对象。

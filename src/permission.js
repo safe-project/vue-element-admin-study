@@ -10,7 +10,7 @@ import getPageTitle from '@/utils/get-page-title'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 /* 白名单*/
-const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
+const whiteList = ['/login', '/auth-redirect','/audit'] // no redirect whitelist
 
 /* 路由拦截器：路由跳转前*/
 router.beforeEach(async(to, from, next) => {
@@ -69,7 +69,6 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     /* has no token*/
-
     if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly
       next()

@@ -1,3 +1,7 @@
+/*
+这个js文件都是每个应用常用的配置，暂时不关注
+*/
+
 import Cookies from 'js-cookie'
 
 const state = {

@@ -1,3 +1,6 @@
+/*
+* 标签页的状态页
+*/
 const state = {
   visitedViews: [],
   cachedViews: []
@@ -11,6 +14,35 @@ const mutations = {
         title: view.meta.title || 'no-name'
       })
     )
+
+  	// state.visitedViews=[
+  	//  	{ "fullPath": "/dashboard", 
+  	//  		"path": "/dashboard", 
+  	//  		"name": "Dashboard", 
+  	//  		"meta": { "title": "Dashboard", "icon": "dashboard", "affix": true }, 
+  	//  		"title": "Dashboard" 
+  	//  	}, 
+  	//  	{ "fullPath": "/documentation/index", 
+  	//  		"path": "/documentation/index", 
+  	//  		"name": "Documentation", 
+  	//  		"meta": { "title": "Documentation", "icon": "documentation", "affix": true }, 
+  	//  		"title": "Documentation" 
+  	//  	},
+  	//  	{ "fullPath": "/audit/index?id=1", 
+  	//  		"path": "/audit/index", 
+  	//  		"name": "Audit", 
+  	//  		"meta": { "title": "Audit", "icon": "user" }, 
+  	//  		"title": "Audit" 
+  	//  	},
+  	//  	{ "fullPath": "/audit/index?id=2", 
+  	//  		"path": "/audit/index", 
+  	//  		"name": "Audit", 
+  	//  		"meta": { "title": "Audit", "icon": "user" }, 
+  	//  		"title": "Audit" 
+  	//  	} 
+  	// ]
+
+
   },
   ADD_CACHED_VIEW: (state, view) => {
     if (state.cachedViews.includes(view.name)) return

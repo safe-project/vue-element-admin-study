@@ -66,6 +66,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/audit',
+    component:  () => import('@/views/audit/index'),
+    hidden: true
+  },
+  {
     path: '/401',
     component: () => import('@/views/error-page/401'),
     hidden: true
@@ -122,16 +127,63 @@ export const constantRoutes = [
       }
     ]
   },
+  // {
+  //   path: '/audit',
+  //   component: Layout,
+  //   redirect: '/audit/index/:id',
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/audit/index'),
+  //       name: 'Audit',
+  //       meta: { title: 'Audit', icon: 'user', noCache: true }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/audit',
+  //   component: Layout,
+  //   redirect: '/audit/index/:id',
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/audit/index'),
+  //       name: 'Audit',
+  //       meta: { title: 'Audit', icon: 'user', noCache: true }
+  //     }
+  //   ]
+  // },
+
   {
     path: '/study',
     component: Layout,
     redirect: '/study/await',
+    name: 'Study',
+    meta: {
+      title: 'Study',
+      icon: 'skill',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
     children: [
       {
         path: 'await',
         component: () => import('@/views/study/await'),
         name: 'Await',
         meta: { title: 'Await', icon: 'skill', noCache: true }
+      },
+      {
+        path: 'random',
+        component: () => import('@/views/study/random'),
+        name: 'Random',
+        meta: { title: 'Random', icon: 'skill', noCache: true }
+      },
+      {
+        path: 'jsonView',
+        component: () => import('@/views/study/jsonView'),
+        name: 'JsonView',
+        meta: { title: 'JsonView', icon: 'skill', noCache: true }
       }
     ]
   }
@@ -187,6 +239,9 @@ export const asyncRoutes = [
   {
     path: '/icon',
     component: Layout,
+    meta: {
+      roles: ['admin'] // you can set roles in root nav
+    },
     children: [
       {
         path: 'index',

@@ -6,6 +6,7 @@ const { showSettings, tagsView, fixedHeader, sidebarLogo } = defaultSettings
 const state = {
   theme: variables.theme,
   showSettings: showSettings,
+  // 是否需要tagsview，默认是true
   tagsView: tagsView,
   fixedHeader: fixedHeader,
   sidebarLogo: sidebarLogo

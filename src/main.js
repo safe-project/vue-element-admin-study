@@ -37,6 +37,14 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 
+
+import JsonViewer from 'vue-json-viewer'
+ 
+// Import JsonViewer as a Vue.js plugin
+Vue.use(JsonViewer)
+
+
+
 /* 阻止启动生产消息，设为true后会在console里面打印一些让你看哪哪文档的tips*/
 Vue.config.productionTip = false
 

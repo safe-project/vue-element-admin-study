@@ -1,0 +1,24 @@
+[
+  {
+    "fullPath": "/dashboard",
+    "path": "/dashboard",
+    "name": "Dashboard",
+    "meta": {
+      "title": "Dashboard",
+      "icon": "dashboard",
+      "affix": true
+    },
+    "title": "Dashboard"
+  },
+  {
+    "fullPath": "/documentation/index",
+    "path": "/documentation/index",
+    "name": "Documentation",
+    "meta": {
+      "title": "Documentation",
+      "icon": "documentation",
+      "affix": true
+    },
+    "title": "Documentation"
+  }
+]

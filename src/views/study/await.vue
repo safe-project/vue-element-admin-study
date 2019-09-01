@@ -18,6 +18,13 @@
         {{ item }}
       </span>
     </div>
+
+    <!-- 给胡方写的代码优化 -->
+		
+
+
+
+
   </div>
 </template>
 
@@ -28,7 +35,16 @@ export default {
   data: function() {
     return {
       phoneNum: '12345',
-      faceList: ['20元', '30元', '50元']
+      faceList: ['20元', '30元', '50元'],
+      // 维护映射
+      typeMapping:{"1":"维护","2":"换装(无偿)","3":"换装(有偿)","4":"加机"},
+      repairInfo:[
+      	{dealDevice: "50118053016", type: "1", location: "后备箱左侧", message: "自动上线", newDevice: ""},
+      	{dealDevice: "50118053016", type: "2", location: "后备箱左侧", message: "自动上线", newDevice: ""},
+      	{dealDevice: "50118053016", type: "2", location: "后备箱左侧", message: "自动上线", newDevice: ""},
+      	{dealDevice: "50118053016", type: "3", location: "后备箱左侧", message: "自动上线", newDevice: ""},
+      	{dealDevice: "50118053016", type: "4", location: "后备箱左侧", message: "自动上线", newDevice: ""},
+      ],
     }
   },
   methods: {
@@ -69,7 +85,24 @@ export default {
       } catch (err) {
         console.log(err)
       }
+  	},
+
+
+  	
+  	mappingType(){
+  		this.repairInfo.forEach((item,index)=>{
+	  		item.typeName = this.typeMapping[item.type];
+	  	})
+  	},
+  	message(){
+  		this.$message.error('sorry，未请求到数据');
   	}
+  },
+  created(){
+  	console.log(3333);
+  	// 你写的三目运算符
+  	this.repairInfo.length?this.mappingType():this.message();
+  	console.log(this.repairInfo);
   }
 }
 </script>

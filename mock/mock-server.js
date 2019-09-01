@@ -3,8 +3,11 @@ const bodyParser = require('body-parser')
 const chalk = require('chalk')
 const path = require('path')
 
+/*process.cwd() 是当前执行node命令时候的文件夹地址 ——工作目录，保证了文件在不同的目录下执行时，路径始终不变*/
 const mockDir = path.join(process.cwd(), 'mock')
+console.log('mockDir的路径：'+mockDir);//：E:\web\安全项目\github_study_pan_project\vue-element-admin-study\mock
 
+// 注册路由
 function registerRoutes(app) {
   let mockLastIndex
   const { default: mocks } = require('./index.js')
@@ -42,7 +45,7 @@ module.exports = app => {
   var mockRoutesLength = mockRoutes.mockRoutesLength
   var mockStartIndex = mockRoutes.mockStartIndex
 
-  // watch files, hot reload mock server
+  // watch files, hot reload mock server 检测mock-server的热更新，没软用
   chokidar.watch(mockDir, {
     ignored: /mock-server/,
     ignoreInitial: true

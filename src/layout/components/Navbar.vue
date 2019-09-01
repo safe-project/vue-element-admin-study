@@ -1,9 +1,11 @@
+<!-- 最顶层模块  暂时不关注 -->
 <template>
   <div class="navbar">
+  	<!-- 打开关闭的那个icon按钮 -->
     <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
-
+		<!-- 面包屑 -->
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
-
+		<!-- 最顶部右侧按钮模块 -->
     <div class="right-menu">
       <template v-if="device!=='mobile'">
         <search id="header-search" class="right-menu-item" />

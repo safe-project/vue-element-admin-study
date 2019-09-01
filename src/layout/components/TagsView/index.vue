@@ -1,5 +1,6 @@
 <template>
   <div id="tags-view-container" class="tags-view-container">
+  	<!-- 外面包一层滚动条 wrapper是滚动条-->
     <scroll-pane ref="scrollPane" class="tags-view-wrapper">
       <router-link
         v-for="tag in visitedViews"
@@ -16,6 +17,8 @@
         <span v-if="!tag.meta.affix" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />
       </router-link>
     </scroll-pane>
+
+    <!-- 标签页右击的那一堆东西 -->
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
       <li @click="refreshSelectedTag(selectedTag)">Refresh</li>
       <li v-if="!(selectedTag.meta&&selectedTag.meta.affix)" @click="closeSelectedTag(selectedTag)">Close</li>
@@ -66,9 +69,11 @@ export default {
     this.addTags()
   },
   methods: {
+  	// 是否激活，显示不不同的类
     isActive(route) {
       return route.path === this.$route.path
     },
+    // 过滤钉死的tags，目的是得到tags数组
     filterAffixTags(routes, basePath = '/') {
       let tags = []
       routes.forEach(route => {
@@ -90,6 +95,7 @@ export default {
       })
       return tags
     },
+    // 初始化tags，就是把钉死的那些tags，add进visitedViews
     initTags() {
       const affixTags = this.affixTags = this.filterAffixTags(this.routes)
       for (const tag of affixTags) {
@@ -99,6 +105,7 @@ export default {
         }
       }
     },
+    // addView 加了缓存
     addTags() {
       const { name } = this.$route
       if (name) {
@@ -106,6 +113,7 @@ export default {
       }
       return false
     },
+    // 其实就是更新visitedview
     moveToCurrentTag() {
       const tags = this.$refs.tag
       this.$nextTick(() => {
@@ -121,6 +129,7 @@ export default {
         }
       })
     },
+    // 更新选择的tag
     refreshSelectedTag(view) {
       this.$store.dispatch('tagsView/delCachedView', view).then(() => {
         const { fullPath } = view
@@ -131,6 +140,7 @@ export default {
         })
       })
     },
+    // 关闭选择的tag
     closeSelectedTag(view) {
       this.$store.dispatch('tagsView/delView', view).then(({ visitedViews }) => {
         if (this.isActive(view)) {
@@ -138,12 +148,14 @@ export default {
         }
       })
     },
+    // 关闭其他的tag
     closeOthersTags() {
       this.$router.push(this.selectedTag)
       this.$store.dispatch('tagsView/delOthersViews', this.selectedTag).then(() => {
         this.moveToCurrentTag()
       })
     },
+    // 关闭所有的tag
     closeAllTags(view) {
       this.$store.dispatch('tagsView/delAllViews').then(({ visitedViews }) => {
         if (this.affixTags.some(tag => tag.path === view.path)) {
@@ -167,6 +179,7 @@ export default {
         }
       }
     },
+    // 右击出现刷新、关闭那一堆按钮，这是右击的逻辑，右击打开菜单
     openMenu(tag, e) {
       const menuMinWidth = 105
       const offsetLeft = this.$el.getBoundingClientRect().left // container margin left
@@ -184,6 +197,7 @@ export default {
       this.visible = true
       this.selectedTag = tag
     },
+    // 关闭菜单，直接就是关闭右击出现的那一堆按钮
     closeMenu() {
       this.visible = false
     }

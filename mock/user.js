@@ -24,7 +24,7 @@ const users = {
 }
 
 export default [
-  // user login
+  // user login 这里用户名只能是admin与editor，密码没有验证可以随便填，密码只要通过前端校验即可
   {
     url: '/user/login',
     type: 'post',
@@ -35,13 +35,13 @@ export default [
       // mock error
       if (!token) {
         return {
-          code: 60204,
+          code: 60204,//输入不正确
           message: 'Account and password are incorrect.'
         }
       }
 
       return {
-        code: 20000,
+        code: 20000,//正确返回的code
         data: token
       }
     }
